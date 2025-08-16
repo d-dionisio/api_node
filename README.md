@@ -39,6 +39,27 @@ As migrações estão localizadas na pasta `drizzle/`. O Drizzle ORM gerencia as
 ## Testes de Requisição
 O arquivo `request.http` contém exemplos de requisições para testar os endpoints da API.
 
+## Fluxo Principal da Aplicação
+
+O diagrama abaixo representa o fluxo de criação e consulta de cursos na API:
+
+```mermaid
+flowchart TD
+    A[Cliente faz requisição HTTP] --> B[Fastify recebe a requisição]
+    B --> C{Tipo de Rota}
+    C -->|GET /courses| D[Consulta cursos no banco de dados]
+    D --> E[Retorna lista de cursos]
+    C -->|POST /courses| F[Valida dados com Zod]
+    F --> G[Insere curso no banco de dados]
+    G --> H[Retorna curso criado]
+    E --> I[Resposta JSON enviada ao cliente]
+    H --> I
+    
+    style A fill:#e1f5fe
+    style I fill:#e8f5e8
+    style C fill:#fff3e0
+```
+
 ## Contribuição
 Sinta-se à vontade para abrir issues ou enviar pull requests.
 
